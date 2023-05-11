@@ -4,7 +4,7 @@ export const Container = () => {
 
     return (
         <Wrapper>
-            <Title>Meal Form 🍕</Title>
+            <Title>Meal Form 🍽️</Title>
             <Form />
         </Wrapper>
     );

@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-
+import xd from './background.jpg'
 export const GlobalStyle = createGlobalStyle`
 html {
     box-sizing: border-box;
@@ -16,8 +16,10 @@ html {
     word-break: break-word;
     text-decoration: none;
     padding: 20px;
-    background: linear-gradient(to right, ${({ theme }) => theme.color.mainColor}, white);
-
+    background-image: url("${xd}");
+    background-position: center;
+  background-size: cover;
+  min-height: 100vh;
     @media(max-width: ${({ theme }) => theme.breakPoint.mobileMax}px){
         padding: 10px;
     }
