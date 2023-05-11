@@ -16,6 +16,10 @@ html {
     word-break: break-word;
     text-decoration: none;
     padding: 20px;
-    background: linear-gradient(to right, ${({theme}) => theme.color.mainColor}, white);
+    background: linear-gradient(to right, ${({ theme }) => theme.color.mainColor}, white);
+
+    @media(max-width: ${({ theme }) => theme.breakPoint.mobileMax}px){
+        padding: 10px;
     }
+   }
   `;    

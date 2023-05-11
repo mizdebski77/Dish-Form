@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Input, Select, Title, Wrapper } from './styledForm';
-import formatStringByPattern from 'format-string-by-pattern';
 import axios from 'axios';
 
 export const Form = () => {
@@ -17,26 +16,13 @@ export const Form = () => {
 
     const [formData, setFormData] = useState(inttailFormData);
 
-    const formatTime = (strings) => {
-        const numbers = strings.replace(/[^\d]/g, "");
-        return formatStringByPattern("00:00:00", numbers);
-    }
-
-
     const handleInputChange = (event) => {
         const { name, value } = event.target;
 
-        if (name === "preparation_time") {
-            setFormData(prevState => ({
-                ...prevState,
-                [name]: formatTime(value)
-            }));
-        } else {
-            setFormData(prevState => ({
-                ...prevState,
-                [name]: value
-            }));
-        }
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
     };
 
 
@@ -48,45 +34,54 @@ export const Form = () => {
             if (formData[key] !== '') {
                 data[key] = formData[key];
             }
-        }
+        };
 
         try {
-            const response = await axios.post('https://umzzcc503l.execute-api.us-west-2.amazonaws.com/dishes/', data);
+            const response = await axios.post('https://umzzcc503l.execute-api.us-west-2.amazonaws.com/dishes/', JSON.stringify(data), {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
             console.log(response.data);
             setFormData(inttailFormData);
         } catch (error) {
             console.error(error);
         }
     };
+
+
+
     return (
         <Wrapper onSubmit={handleSubmit} >
-            <Title>Dish name</Title>
+            <Title>Dish name *</Title>
             <Input
                 name="name"
+                minLength={3}
                 value={formData.name}
                 onChange={handleInputChange}
                 type='text'
-                placeholder='Enter dish name'
+                placeholder='Enter dish name (at least 3 characters)'
                 required
             />
 
-            <Title>Preparation time</Title>
+            <Title>Preparation time *</Title>
             <Input
                 name="preparation_time"
                 value={formData.preparation_time}
                 onChange={handleInputChange}
-                type='text'
-                placeholder='00:00:00'
+                type='time'
                 required
+                step="2"
             />
 
 
-            <Title>Dish type</Title>
+            <Title>Dish type *</Title>
             <Select
                 name="type"
                 value={formData.type}
                 onChange={handleInputChange}
                 required
+                validate="xd"
             >
                 <option disabled value=''>Select dish type</option>
                 <option value="pizza">Pizza</option>
@@ -103,7 +98,7 @@ export const Form = () => {
                                 ? "Spiciness scale"
                                 : "Number of bread slice"
                         }
-                    </Title>
+                        {""} * </Title>
                     <Input
                         name={formData.type === "pizza"
                             ? "no_of_slices"
@@ -133,7 +128,7 @@ export const Form = () => {
 
             {formData.type === "pizza" ?
                 <>
-                    <Title>Diameter in cm</Title>
+                    <Title>Diameter in cm *</Title>
                     <Input
                         required
                         name="diameter"

@@ -13,7 +13,11 @@ export const Input = styled.input`
     border: none;
     border-radius: 10px;
     box-shadow: 0 0 4px black;
-    outline-color:${({theme}) => theme.color.mainColor} ;
+    outline-color:${({theme}) => theme.color.mainColor};
+
+    @media (max-width:${({ theme }) => theme.breakPoint.mobileMax}px) {
+        font-size: 14px;
+    }
 `;
 
 export const Select = styled.select`
@@ -23,6 +27,10 @@ export const Select = styled.select`
     border-radius: 10px;
     box-shadow: 0 0 5px black;
     outline-color:${({theme}) => theme.color.mainColor} ;
+
+    @media (max-width:${({ theme }) => theme.breakPoint.mobileMax}px) {
+        font-size: 14px;
+    }
 `;
 
 export const Option = styled.option`
@@ -32,6 +40,10 @@ export const Option = styled.option`
 export const Title = styled.h2`
     margin: 0;
     font-size: 20px;
+
+    @media (max-width:${({ theme }) => theme.breakPoint.mobileMax}px) {
+        font-size: 16px;
+    }
 `;
 
 export const Button = styled.button`
@@ -47,7 +59,13 @@ export const Button = styled.button`
 
     :hover {
         transform: scale(1.03);
-        
+        @media (max-width:${({ theme }) => theme.breakPoint.mobileMax}px) {
+            transform: scale(1);
+    }
+    }
+
+    @media (max-width:${({ theme }) => theme.breakPoint.mobileMax}px) {
+        font-size: 16px;
     }
 `;
 
