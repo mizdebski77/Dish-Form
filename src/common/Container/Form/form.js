@@ -42,10 +42,15 @@ export const Form = () => {
                     'Content-Type': 'application/json'
                 }
             });
+
             console.log(response.data);
             setFormData(inttailFormData);
+            alert("The form has been sent successfully");
+
         } catch (error) {
             console.error(error);
+            setFormData(inttailFormData);
+            alert("Ups! Something went wrong. Try again later");
         }
     };
 
