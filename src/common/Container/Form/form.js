@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const Form = () => {
 
-    const inttailFormData = {
+    const initialFormData = {
         name: '',
         preparation_time: '',
         type: '',
@@ -14,7 +14,7 @@ export const Form = () => {
         diameter: '',
     };
 
-    const [formData, setFormData] = useState(inttailFormData);
+    const [formData, setFormData] = useState(initialFormData);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -44,12 +44,12 @@ export const Form = () => {
             });
 
             console.log(response.data);
-            setFormData(inttailFormData);
+            setFormData(initialFormData);
             alert("The form has been sent successfully");
 
         } catch (error) {
             console.error(error);
-            setFormData(inttailFormData);
+            setFormData(initialFormData);
             alert("Ups! Something went wrong. Try again later");
         }
     };
